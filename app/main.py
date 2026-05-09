@@ -2,9 +2,7 @@
 StudySync FastAPI app — Part 3 of the PDC Assignment 2.
 
 Implements the Circuit Breaker + Fallback pattern around an external LLM
-to fix the Fault Tolerance bug, plus the mandatory X-Student-ID middleware.
-
-Author: Saleha Shoaib (BSCS23036)
+to fix the Fault Tolerance bug
 """
 
 from __future__ import annotations
@@ -30,11 +28,6 @@ breaker = CircuitBreaker(
     name="llm",
 )
 
-
-# --------------------------------------------------------------------------- #
-# MANDATORY: every response must carry X-Student-ID. Missing this header is an
-# automatic zero on Part 3, per the assignment spec.
-# --------------------------------------------------------------------------- #
 @app.middleware("http")
 async def add_student_id_header(request: Request, call_next):
     try:
@@ -48,9 +41,6 @@ async def add_student_id_header(request: Request, call_next):
     return response
 
 
-# --------------------------------------------------------------------------- #
-# Schemas
-# --------------------------------------------------------------------------- #
 class AskRequest(BaseModel):
     prompt: str
 
@@ -81,10 +71,6 @@ def fallback_answer(prompt: str) -> str:
         "break the topic into smaller questions and search your notes first."
     )
 
-
-# --------------------------------------------------------------------------- #
-# Routes
-# --------------------------------------------------------------------------- #
 @app.get("/health")
 async def health():
     return {"status": "ok", "student_id": STUDENT_ID}
