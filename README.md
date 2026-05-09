@@ -7,8 +7,6 @@ Distributed Systems"). It implements the **Circuit Breaker + Fallback** pattern
 around an external LLM call inside a FastAPI backend, fixing the Fault Tolerance
 bug described in the spec (a 60-second LLM hang taking down the whole server).
 
-The PDF report (Part 1 + Part 2) lives in [`report/report.pdf`](report/report.pdf).
-
 ## What is implemented
 
 - `app/circuit_breaker.py` — async `CircuitBreaker` with `CLOSED → OPEN → HALF_OPEN`
@@ -19,7 +17,6 @@ The PDF report (Part 1 + Part 2) lives in [`report/report.pdf`](report/report.pd
 - `app/main.py` — FastAPI app exposing `/ask` (protected by the breaker, falls
   back gracefully on failure), plus admin endpoints to flip the upstream mode
   and inspect breaker state.
-- **Mandatory** `X-Student-ID: BSCS23036` middleware on every response.
 - `tests/test_circuit_breaker.py` — pytest suite that *triggers* the failure
   state and proves the fix:
   - request does not block on a slow upstream,
@@ -126,18 +123,8 @@ PDC-Sp24-BSCS23036-Shoaib/
 │   └── main.py                # FastAPI app + X-Student-ID middleware
 ├── tests/
 │   └── test_circuit_breaker.py
-├── report/
-│   └── report.pdf             # Part 1 + Part 2 (3 pages max)
 ├── demo.py                    # for the 2-minute screen recording
 ├── requirements.txt
 └── README.md
 ```
 
-## Notes for the grader
-
-- The `X-Student-ID: BSCS23036` header is enforced by FastAPI middleware in
-  `app/main.py`; the test suite verifies it independently.
-- Repository is named exactly `PDC-Sp24-BSCS23036-Shoaib` per the spec.
-- The PDF report is **3 pages or fewer** and contains the UML sequence
-  diagram for the optimistic-locking sync fix and the CAP-theorem trade-off
-  discussion.
