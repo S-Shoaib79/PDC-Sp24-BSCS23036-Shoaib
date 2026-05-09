@@ -1,6 +1,6 @@
 Saleha Shoaib — BSCS23036
 
-# StudySync — Resilient Edition (PDC Assignment 2)
+# StudySync(PDC Assignment 2)
 
 This repo is the Part 3 deliverable for the PDC Assignment 2 ("Building Resilient
 Distributed Systems"). It implements the **Circuit Breaker + Fallback** pattern
