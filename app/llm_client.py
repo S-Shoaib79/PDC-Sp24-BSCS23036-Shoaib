@@ -2,8 +2,7 @@
 Mock external LLM client.
 
 Stands in for a real LLM provider (OpenAI / Anthropic / etc.) so the
-circuit breaker can be demoed without burning real API credits and
-without depending on the public internet during grading.
+circuit breaker can be demoed.
 
 Failure modes are toggled via an in-memory `mode` flag so the demo
 script can flip the upstream between healthy / down / slow.
