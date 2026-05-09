@@ -39,9 +39,6 @@ def _client() -> AsyncClient:
     return AsyncClient(transport=ASGITransport(app=app), base_url="http://test")
 
 
-# --------------------------------------------------------------------------- #
-# Mandatory submission rule: every response carries X-Student-ID.
-# --------------------------------------------------------------------------- #
 @pytest.mark.asyncio
 async def test_student_id_header_present_on_every_response():
     async with _client() as c:
